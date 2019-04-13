@@ -9,7 +9,7 @@ services:
     restart: unless-stopped
     working_dir: /var/www
     volumes:
-      - ./:/home/app
+      - ./:/var/www
     depends_on:
       - db
     networks:
@@ -25,7 +25,7 @@ services:
       - app
     user: node
     volumes:
-      - ./:/home/app
+      - ./:/var/www
 
   webserver:
     image: nginx:alpine
