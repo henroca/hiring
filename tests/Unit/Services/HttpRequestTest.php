@@ -21,13 +21,15 @@ class HttpRequestTest extends TestCase
      */
     public function add_a_new_config()
     {
-        $this->assertEquals(['timeout'  => 2.0], HttpRequest::getConfig());
+        $http = new HttpRequest();
 
-        HttpRequest::addConfig(['base_uri' => 'http://httpbin.org']);
+        $this->assertEquals(['timeout'  => 2.0], $http->getConfig());
+
+        $http->addConfig(['base_uri' => 'http://httpbin.org']);
 
         $this->assertEquals(
             ['timeout'  => 2.0, 'base_uri' => 'http://httpbin.org'],
-            HttpRequest::getConfig()
+            $http->getConfig()
         );
     }
 
@@ -41,9 +43,11 @@ class HttpRequestTest extends TestCase
         $mock = new MockHandler([new Response(200, ['X-Foo' => 'Bar'], 'response')]);
         $handler = HandlerStack::create($mock);
 
-        HttpRequest::addConfig(['handler' => $handler]);
+        $http = new HttpRequest();
 
-        $response = HttpRequest::get('http://example.com.br');
+        $http->addConfig(['handler' => $handler]);
+
+        $response = $http->get('http://example.com.br');
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals(['Bar'], $response->getHeader('X-Foo'));

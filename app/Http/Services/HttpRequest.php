@@ -13,7 +13,7 @@ use GuzzleHttp\Client;
  */
 class HttpRequest
 {
-    use Config { getConfig as getHttpConfig; }
+    use Config;
 
     /**
      * Configuração basica para as requests
@@ -23,16 +23,9 @@ class HttpRequest
     const BASE_CONFIG = ['timeout'  => 2.0];
 
     /**
-     * Instância de HttpRequest
-     *
-     * @var HttpRequest
-     */
-    private static $instance;
-
-    /**
      *
      */
-    private function __construct()
+    public function __construct()
     {
         $this->setConfig(self::BASE_CONFIG);
     }
@@ -45,7 +38,7 @@ class HttpRequest
      */
     public function makeRequest(string $path)
     {
-        $client = new Client($this->getHttpConfig());
+        $client = new Client($this->getConfig());
         return $client->request('GET', $path);
     }
 
@@ -55,43 +48,8 @@ class HttpRequest
      * @param string $path
      * @return mixed $response
      */
-    public static function get(string $path)
+    public function get(string $path)
     {
-        return self::getInstance()->makeRequest($path);
-    }
-
-    /**
-     * Adiciona uma configuração para as requisições
-     *
-     * @param array $config
-     */
-    public static function addConfig(array $config)
-    {
-        $oldConfig = self::getInstance()->getHttpConfig();
-        self::getInstance()->setConfig(array_merge($oldConfig, $config));
-    }
-
-    /**
-     * Retorna a configuração das requisições
-     *
-     * @return array $config
-     */
-    public static function getConfig() : array
-    {
-        return self::getInstance()->getHttpConfig();
-    }
-
-    /**
-     * Retorna uma instancia de HttpRequest, se não existir cria uma
-     *
-     * @return HttpRequest $instance
-     */
-    private static function getInstance() : HttpRequest
-    {
-        if (is_null(self::$instance)) {
-            return self::$instance = new HttpRequest();
-        }
-
-        return self::$instance;
+        return $this->makeRequest($path);
     }
 }

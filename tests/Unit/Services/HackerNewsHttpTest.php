@@ -6,6 +6,7 @@ use Tests\TestCase;
 use GuzzleHttp\Psr7\Response;
 use App\Http\Services\HttpRequest;
 use App\Http\Services\HackerNewsHttp;
+use App\Support\Collection;
 
 /**
  * ClassNameTest
@@ -27,8 +28,9 @@ class HackerNewsHttpTest extends TestCase
                 new Response(200, [], '[1, 2, 3, 4, 5]')
             );
 
-        HackerNewsHttp::registerRequest($mock);
+        $http = new HackerNewsHttp();
+        $http->registerRequest($mock);
 
-        $this->assertEquals([1, 2, 3, 4, 5], HackerNewsHttp::getNewStories());
+        $this->assertEquals(new Collection([1, 2, 3, 4, 5]), $http->getNewStories());
     }
 }

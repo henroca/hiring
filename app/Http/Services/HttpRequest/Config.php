@@ -14,7 +14,7 @@ trait Config
      *
      * @param array $config
      */
-    private function setConfig(array $config)
+    public function setConfig(array $config)
     {
         $this->config = $config;
     }
@@ -23,8 +23,18 @@ trait Config
      *
      * @return array $config
      */
-    private function getConfig() : array
+    public function getConfig() : array
     {
         return $this->config;
+    }
+
+    /**
+     * Adiciona uma configuração para as requisições
+     *
+     * @param array $config
+     */
+    public function addConfig(array $config)
+    {
+        $this->setConfig(array_merge($this->getConfig(), $config));
     }
 }
