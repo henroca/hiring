@@ -30,10 +30,10 @@ class HackerNewsTest extends TestCase
      */
     public function resturns_path_to_get_stories()
     {
-        $path = 'https://hacker-news.firebaseio.com/v0/topstories.json';
+        $path = 'https://hacker-news.firebaseio.com/v0/newstories.json';
         $hackerNews = new HackerNews();
 
-        $this->assertEquals('topstories.json', HackerNews::TOP_STORIES);
-        $this->assertEquals($path, $hackerNews->topStories());
+        $this->assertEquals('newstories.json', HackerNews::TOP_STORIES);
+        $this->assertEquals($path, $hackerNews->newStories());
     }
 }

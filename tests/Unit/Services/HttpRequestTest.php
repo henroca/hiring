@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Services;
+
 use Tests\TestCase;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -36,13 +38,15 @@ class HttpRequestTest extends TestCase
      */
     public function make_request_with_guzzle()
     {
-        $mock = new MockHandler([new Response(200, ['X-Foo' => 'Bar'])]);
+        $mock = new MockHandler([new Response(200, ['X-Foo' => 'Bar'], 'response')]);
         $handler = HandlerStack::create($mock);
 
         HttpRequest::addConfig(['handler' => $handler]);
 
         $response = HttpRequest::get('http://example.com.br');
 
-        $this->assertEquals($response->getStatusCode(), 200);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(['Bar'], $response->getHeader('X-Foo'));
+        $this->assertEquals('response', $response->getBody()->getContents());
     }
 }

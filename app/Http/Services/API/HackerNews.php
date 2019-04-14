@@ -22,14 +22,14 @@ class HackerNews
      *
      * @var string
      */
-    const TOP_STORIES = 'topstories.json';
+    const TOP_STORIES = 'newstories.json';
 
     /**
      * URL para as top 500 histórias
      *
      * @return string $url
      */
-    public function topStories()
+    public function newStories()
     {
         return self::BASE_PATH . self::TOP_STORIES;
     }

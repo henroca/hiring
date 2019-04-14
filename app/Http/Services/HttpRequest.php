@@ -27,7 +27,7 @@ class HttpRequest
      *
      * @var HttpRequest
      */
-    static $instance;
+    private static $instance;
 
     /**
      *
