@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Http\Services\API\HackerNews;
+use App\Support\Collection;
 
 /**
  * Realiza as requisições para o hacker news
@@ -17,16 +18,21 @@ class HackerNewsHttp
      *
      * @var mixed
      */
-    private static $request;
+    private $request;
+
+    public function __construct()
+    {
+        $this->registerRequest(new HttpRequest);
+    }
 
     /**
      * Registra uma requisição
      *
-     * @var mixed $request
+     * @var HttpRequest $request
      */
-    public static function registerRequest($request)
+    public function registerRequest($request)
     {
-        self::$request = $request;
+        $this->request = $request;
     }
 
     /**
@@ -34,21 +40,13 @@ class HackerNewsHttp
      *
      * @return array $stories
      */
-    public static function getNewStories() : array
+    public function getNewStories() : Collection
     {
         $api = new HackerNews();
-        $response = self::getResponse($api->newStories());
+        $response = $this->getResponse($api->newStories());
+        $stories = new Collection(json_decode($response));
 
-        return json_decode($response);
-    }
-
-    /**
-     *
-     * @return mixed $request
-     */
-    private static function getRequest()
-    {
-        return self::$request ?? HttpRequest::class;
+        return $stories;
     }
 
     /**
@@ -56,10 +54,8 @@ class HackerNewsHttp
      *
      * @return string $response
      */
-    private static function getResponse($url) : string
+    private function getResponse($url) : string
     {
-        $request = self::getRequest();
-
-        return $request->get($url)->getBody()->getContents();
+        return $this->request->get($url)->getBody()->getContents();
     }
 }
