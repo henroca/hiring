@@ -1792,6 +1792,47 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pagination.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pagination.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _store_modules_stories_getters_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/modules/stories/getters-types */ "./resources/js/store/modules/stories/getters-types.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    pagination: "stories/".concat(_store_modules_stories_getters_types__WEBPACK_IMPORTED_MODULE_1__["PAGINATION"])
+  }))
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Stories.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Stories.vue?vue&type=script&lang=js& ***!
@@ -1803,6 +1844,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _store_modules_stories_action_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/modules/stories/action-types */ "./resources/js/store/modules/stories/action-types.js");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -43831,6 +43878,57 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pagination.vue?vue&type=template&id=d7acf176&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Pagination.vue?vue&type=template&id=d7acf176& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("nav", { attrs: { "aria-label": "Page navigation" } }, [
+    _c(
+      "ul",
+      { staticClass: "pagination" },
+      _vm._l(_vm.pagination.pages, function(page) {
+        return _c(
+          "li",
+          { key: page.link + page.text, class: "page-item " + page.className },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "page-link",
+                attrs: { to: "/stories/" + page.link }
+              },
+              [
+                _vm._v(
+                  "\n                " + _vm._s(page.text) + "\n            "
+                )
+              ]
+            )
+          ],
+          1
+        )
+      }),
+      0
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Stories.vue?vue&type=template&id=5cb72838&":
 /*!**********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Stories.vue?vue&type=template&id=5cb72838& ***!
@@ -43857,36 +43955,47 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       !_vm.load
-        ? _c(
-            "div",
-            { staticClass: "col-md-10" },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._l(_vm.stories, function(story) {
-                return _c(
+        ? _c("div", { staticClass: "col-md-10" }, [
+            _c(
+              "div",
+              { staticClass: "row justify-content-center" },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("pagination"),
+                _vm._v(" "),
+                _c(
                   "div",
-                  { key: story, staticClass: "col-md-12 mb-4" },
-                  [
-                    _c("div", { staticClass: "card" }, [
-                      _c("div", { staticClass: "card-header" }, [
-                        _vm._v("História " + _vm._s(story))
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-body" }, [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(story) +
-                            "\n                "
-                        )
-                      ])
-                    ])
-                  ]
-                )
-              })
-            ],
-            2
-          )
+                  { staticClass: "row" },
+                  _vm._l(_vm.stories, function(story) {
+                    return _c(
+                      "div",
+                      { key: story, staticClass: "col-12 col-md-6 mb-4" },
+                      [
+                        _c("div", { staticClass: "card" }, [
+                          _c("div", { staticClass: "card-header" }, [
+                            _vm._v("História " + _vm._s(story))
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "card-body" }, [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(story) +
+                                "\n                        "
+                            )
+                          ])
+                        ])
+                      ]
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("pagination")
+              ],
+              1
+            )
+          ])
         : _vm._e()
     ],
     1
@@ -43897,8 +44006,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h1", { staticClass: "mb-5" }, [
-      _vm._v("\n            Hacker News\n            "),
+    return _c("h1", { staticClass: "mb-5 col-12" }, [
+      _vm._v("\n                Hacker News\n                "),
       _c("small", { staticClass: "text-muted" }, [_vm._v("Histórias")])
     ])
   }
@@ -59760,6 +59869,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('stories', __webpack_require__(/*! ./components/Stories.vue */ "./resources/js/components/Stories.vue")["default"]);
+Vue.component('pagination', __webpack_require__(/*! ./components/Pagination.vue */ "./resources/js/components/Pagination.vue")["default"]);
 Vue.component('spinner', __webpack_require__(/*! epic-spinners */ "./node_modules/epic-spinners/src/lib.js").AtomSpinner);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -59906,6 +60016,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_332fccf4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_332fccf4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Pagination.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/Pagination.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Pagination_vue_vue_type_template_id_d7acf176___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Pagination.vue?vue&type=template&id=d7acf176& */ "./resources/js/components/Pagination.vue?vue&type=template&id=d7acf176&");
+/* harmony import */ var _Pagination_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Pagination.vue?vue&type=script&lang=js& */ "./resources/js/components/Pagination.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Pagination_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Pagination_vue_vue_type_template_id_d7acf176___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Pagination_vue_vue_type_template_id_d7acf176___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Pagination.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Pagination.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/Pagination.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Pagination.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pagination.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Pagination.vue?vue&type=template&id=d7acf176&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/Pagination.vue?vue&type=template&id=d7acf176& ***!
+  \*******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination_vue_vue_type_template_id_d7acf176___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Pagination.vue?vue&type=template&id=d7acf176& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Pagination.vue?vue&type=template&id=d7acf176&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination_vue_vue_type_template_id_d7acf176___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination_vue_vue_type_template_id_d7acf176___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -60066,6 +60245,20 @@ var LOAD_STORIES = 'LOAD_STORIES';
 
 /***/ }),
 
+/***/ "./resources/js/store/modules/stories/getters-types.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/store/modules/stories/getters-types.js ***!
+  \*************************************************************/
+/*! exports provided: PAGINATION */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PAGINATION", function() { return PAGINATION; });
+var PAGINATION = 'PAGINATION';
+
+/***/ }),
+
 /***/ "./resources/js/store/modules/stories/index.js":
 /*!*****************************************************!*\
   !*** ./resources/js/store/modules/stories/index.js ***!
@@ -60078,8 +60271,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api */ "./resources/js/store/api.js");
-/* harmony import */ var _mutation_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mutation-types */ "./resources/js/store/modules/stories/mutation-types.js");
-/* harmony import */ var _action_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./action-types */ "./resources/js/store/modules/stories/action-types.js");
+/* harmony import */ var _getters_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getters-types */ "./resources/js/store/modules/stories/getters-types.js");
+/* harmony import */ var _mutation_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mutation-types */ "./resources/js/store/modules/stories/mutation-types.js");
+/* harmony import */ var _action_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./action-types */ "./resources/js/store/modules/stories/action-types.js");
 
 
 var _mutations, _actions;
@@ -60093,34 +60287,106 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var state = {
   stories: [],
-  load: false
+  load: false,
+  pagination: null
 };
-var mutations = (_mutations = {}, _defineProperty(_mutations, _mutation_types__WEBPACK_IMPORTED_MODULE_2__["SET_STORIES"], function (state, stories) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, _mutation_types__WEBPACK_IMPORTED_MODULE_3__["SET_STORIES"], function (state, stories) {
   state.stories = stories;
-}), _defineProperty(_mutations, _mutation_types__WEBPACK_IMPORTED_MODULE_2__["SET_LOAD"], function (state, load) {
+}), _defineProperty(_mutations, _mutation_types__WEBPACK_IMPORTED_MODULE_3__["SET_LOAD"], function (state, load) {
   state.load = load;
+}), _defineProperty(_mutations, _mutation_types__WEBPACK_IMPORTED_MODULE_3__["SET_PAGINATION"], function (state, pagination) {
+  state.pagination = pagination;
 }), _mutations);
-var actions = (_actions = {}, _defineProperty(_actions, _action_types__WEBPACK_IMPORTED_MODULE_3__["FETCH_STORIES"], function () {
-  var _ref2 = _asyncToGenerator(
+
+var page = function page(link, text) {
+  var className = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  return {
+    link: link,
+    text: text,
+    className: className
+  };
+};
+
+var makePagination = function makePagination(pagination) {
+  if (pagination == null) return [];
+  var pages = [];
+  var current_page = pagination.current_page,
+      last_page = pagination.last_page;
+  var prev_page = current_page - 1;
+  var next_page = current_page + 1;
+  var prev_class = prev_page < 1 ? 'disabled' : '';
+  var next_class = next_page > last_page ? 'disabled' : '';
+  pages.push(page(prev_page, 'Anterior', prev_class));
+
+  if (current_page - 3 >= 1) {
+    pages.push(page(1, 1));
+  }
+
+  if (current_page - 3 > 1) {
+    pages.push(page(current_page - 3, '...', 'disabled'));
+  }
+
+  if (current_page - 2 >= 1) {
+    pages.push(page(current_page - 2, current_page - 2));
+  }
+
+  if (prev_page >= 1) {
+    pages.push(page(prev_page, prev_page));
+  }
+
+  pages.push(page(current_page, current_page, 'disabled'));
+
+  if (next_page <= last_page) {
+    pages.push(page(next_page, next_page));
+  }
+
+  if (current_page + 2 <= last_page) {
+    pages.push(page(current_page + 2, current_page + 2));
+  }
+
+  if (current_page + 3 < last_page) {
+    pages.push(page(current_page + 3, '...', 'disabled'));
+  }
+
+  if (current_page + 3 <= last_page) {
+    pages.push(page(last_page, last_page));
+  }
+
+  pages.push(page(next_page, 'Próximo', next_class));
+  return {
+    current_page: pagination.current_page,
+    pages: pages
+  };
+};
+
+var getters = _defineProperty({}, _getters_types__WEBPACK_IMPORTED_MODULE_2__["PAGINATION"], function (_ref) {
+  var pagination = _ref.pagination;
+  return makePagination(pagination);
+});
+
+var actions = (_actions = {}, _defineProperty(_actions, _action_types__WEBPACK_IMPORTED_MODULE_4__["FETCH_STORIES"], function () {
+  var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref, page) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref2, page) {
     var commit, response;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            commit = _ref.commit;
-            commit(_mutation_types__WEBPACK_IMPORTED_MODULE_2__["SET_LOAD"], true);
+            commit = _ref2.commit;
+            commit(_mutation_types__WEBPACK_IMPORTED_MODULE_3__["SET_LOAD"], true);
             _context.next = 4;
             return Object(_api__WEBPACK_IMPORTED_MODULE_1__["getStories"])(page);
 
           case 4:
             response = _context.sent;
-            commit(_mutation_types__WEBPACK_IMPORTED_MODULE_2__["SET_STORIES"], response.data);
+            commit(_mutation_types__WEBPACK_IMPORTED_MODULE_3__["SET_PAGINATION"], response);
+            commit(_mutation_types__WEBPACK_IMPORTED_MODULE_3__["SET_STORIES"], response.data);
 
-          case 6:
+          case 7:
           case "end":
             return _context.stop();
         }
@@ -60129,20 +60395,20 @@ var actions = (_actions = {}, _defineProperty(_actions, _action_types__WEBPACK_I
   }));
 
   return function (_x, _x2) {
-    return _ref2.apply(this, arguments);
+    return _ref3.apply(this, arguments);
   };
-}()), _defineProperty(_actions, _action_types__WEBPACK_IMPORTED_MODULE_3__["LOAD_STORIES"], function () {
-  var _ref4 = _asyncToGenerator(
+}()), _defineProperty(_actions, _action_types__WEBPACK_IMPORTED_MODULE_4__["LOAD_STORIES"], function () {
+  var _ref5 = _asyncToGenerator(
   /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref3, page) {
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref4, page) {
     var dispatch, commit;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            dispatch = _ref3.dispatch, commit = _ref3.commit;
-            dispatch(_action_types__WEBPACK_IMPORTED_MODULE_3__["FETCH_STORIES"], page).then(function () {
-              return commit(_mutation_types__WEBPACK_IMPORTED_MODULE_2__["SET_LOAD"], false);
+            dispatch = _ref4.dispatch, commit = _ref4.commit;
+            dispatch(_action_types__WEBPACK_IMPORTED_MODULE_4__["FETCH_STORIES"], page).then(function () {
+              return commit(_mutation_types__WEBPACK_IMPORTED_MODULE_3__["SET_LOAD"], false);
             });
 
           case 2:
@@ -60154,14 +60420,15 @@ var actions = (_actions = {}, _defineProperty(_actions, _action_types__WEBPACK_I
   }));
 
   return function (_x3, _x4) {
-    return _ref4.apply(this, arguments);
+    return _ref5.apply(this, arguments);
   };
 }()), _actions);
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: state,
   actions: actions,
-  mutations: mutations
+  mutations: mutations,
+  getters: getters
 });
 
 /***/ }),
@@ -60170,15 +60437,17 @@ var actions = (_actions = {}, _defineProperty(_actions, _action_types__WEBPACK_I
 /*!**************************************************************!*\
   !*** ./resources/js/store/modules/stories/mutation-types.js ***!
   \**************************************************************/
-/*! exports provided: SET_STORIES, SET_LOAD */
+/*! exports provided: SET_STORIES, SET_LOAD, SET_PAGINATION */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_STORIES", function() { return SET_STORIES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_LOAD", function() { return SET_LOAD; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PAGINATION", function() { return SET_PAGINATION; });
 var SET_STORIES = 'SET_STORIES';
 var SET_LOAD = 'SET_LOAD';
+var SET_PAGINATION = 'SET_PAGINATION';
 
 /***/ }),
 

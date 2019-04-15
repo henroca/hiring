@@ -21,6 +21,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('stories', require('./components/Stories.vue').default);
+Vue.component('pagination', require('./components/Pagination.vue').default);
 Vue.component('spinner', require('epic-spinners').AtomSpinner);
 
 /**
