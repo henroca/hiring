@@ -6,15 +6,21 @@
             :size="60"
             :color="'#ff1d5e'"
         />
-        <div
-            class="col-md-10 mb-4"
-            v-for="story in stories"
-            :key="story"
-        >
-            <div class="card">
-                <div class="card-header">História {{ story }}</div>
-                <div class="card-body">
-                    {{ story }}
+        <div v-if="!load" class="col-md-10">
+            <h1 class="mb-5">
+                Hacker News
+                <small class="text-muted">Histórias</small>
+            </h1>
+            <div
+                class="col-md-12 mb-4"
+                v-for="story in stories"
+                :key="story"
+            >
+                <div class="card">
+                    <div class="card-header">História {{ story }}</div>
+                    <div class="card-body">
+                        {{ story }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -32,7 +38,14 @@
         }),
 
         mounted() {
-            this.$store.dispatch(`stories/${LOAD_STORIES}`);
+            const page = this.$route.params.page || 1;
+            this.$store.dispatch(`stories/${LOAD_STORIES}`, page);
+        },
+
+        beforeRouteUpdate (to, from, next) {
+            const page = to.params.page || 1;
+            this.$store.dispatch(`stories/${LOAD_STORIES}`, page);
+            next();
         }
     }
 </script>

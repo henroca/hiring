@@ -29,11 +29,13 @@ Vue.component('spinner', require('epic-spinners').AtomSpinner);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-let App = require('./components/App.vue').default;
-let store = require('./store').default;
+const App = require('./components/App.vue').default;
+const store = require('./store').default;
+const router = require('./router').default;
 
 new Vue({
     el: '#app',
     store,
+    router,
     render: h => h(App)
 });

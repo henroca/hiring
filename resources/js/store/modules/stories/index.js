@@ -26,16 +26,16 @@ let mutations = {
 };
 
 let actions = {
-    async [FETCH_STORIES] ({ commit }) {
+    async [FETCH_STORIES] ({ commit }, page) {
         commit(SET_LOAD, true);
 
-        let response = await getStories();
+        let response = await getStories(page);
 
         commit(SET_STORIES, response.data);
     },
 
-    async [LOAD_STORIES] ({ dispatch, commit }) {
-        dispatch(FETCH_STORIES).then(() => commit(SET_LOAD, false));
+    async [LOAD_STORIES] ({ dispatch, commit }, page) {
+        dispatch(FETCH_STORIES, page).then(() => commit(SET_LOAD, false));
     },
 };
 
