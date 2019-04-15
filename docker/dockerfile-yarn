@@ -4,5 +4,14 @@ LABEL maintainer="Jefferson Ramos"
 
 WORKDIR /var/www
 
+# Copy existing application directory contents
+COPY . /var/www
+
 RUN npm install -g npm@latest \
     && npm install -g yarn
+
+# Copy existing application directory permissions
+COPY --chown=node:node . /var/www
+
+# Change current user to node
+USER node
