@@ -16,4 +16,11 @@ class StoryController extends Controller
 
         return response()->json($paginate);
     }
+
+    public function show(HackerNewsHttp $http, $id)
+    {
+        $story = $http->getStory($id);
+
+        return response()->json($story->jsonSerialize());
+    }
 }

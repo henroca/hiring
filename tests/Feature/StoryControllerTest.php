@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Http\Services\HackerNewsHttp;
 use App\Support\Collection;
+use App\Models\Story;
 
 class StoryControllerTest extends TestCase
 {
@@ -17,6 +18,7 @@ class StoryControllerTest extends TestCase
      */
     public function returns_the_stories()
     {
+        $this->loadStories();
         $collection = new Collection([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
         $this->mock->shouldReceive('load')
@@ -50,6 +52,7 @@ class StoryControllerTest extends TestCase
      */
     public function returns_the_second_page()
     {
+        $this->loadStories();
         $collection = new Collection([10 => 11, 11 => 12]);
 
         $this->mock->shouldReceive('load')
@@ -76,14 +79,35 @@ class StoryControllerTest extends TestCase
         );
     }
 
+    /**
+     * Deve retornar uma história pelo id
+     *
+     * @test
+     */
+    public function returns_the_history_by_id()
+    {
+        $this->mock->expects()->getStory(2)->andReturn(
+            new Story(['text' => 'fake', 'title' => 'fake news'])
+        );
+
+        $response = $this->json('GET', '/api/stories/2');
+
+        $response->assertStatus(200)
+            ->assertJson(['text' => 'fake', 'title' => 'fake news']);
+    }
+
+    private function loadStories()
+    {
+        $this->mock->expects()->getNewStories()->andReturn(
+            new Collection([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+        );
+    }
+
     protected function setUp() : void
     {
         parent::setUp();
 
         $this->mock = \Mockery::mock(HackerNewsHttp::class);
-        $this->mock->expects()->getNewStories()->andReturn(
-            new Collection([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-        );
 
         $this->app->instance(HackerNewsHttp::class, $this->mock);
     }

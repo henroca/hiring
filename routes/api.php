@@ -13,4 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('stories', 'StoryController@index');
+Route::resource('stories', 'StoryController')->only(['index', 'show']);
