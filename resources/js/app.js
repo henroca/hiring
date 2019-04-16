@@ -22,6 +22,7 @@ window.Vue = require('vue');
 
 Vue.component('stories', require('./components/Stories.vue').default);
 Vue.component('pagination', require('./components/Pagination.vue').default);
+Vue.component('story', require('./components/Story.vue').default);
 Vue.component('spinner', require('epic-spinners').AtomSpinner);
 
 /**
