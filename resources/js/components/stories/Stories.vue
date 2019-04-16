@@ -24,7 +24,7 @@
 
 <script>
     import { mapState } from 'vuex'
-    import { LOAD_STORIES } from '../store/modules/stories/action-types';
+    import { LOAD_STORIES } from '../../store/modules/stories/action-types';
 
     export default {
         computed: mapState({
@@ -41,6 +41,6 @@
             const page = to.params.page || 1;
             this.$store.dispatch(`stories/${LOAD_STORIES}`, page);
             next();
-        }
+        },
     }
 </script>

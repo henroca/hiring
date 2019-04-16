@@ -1,1 +1,2 @@
 export const PAGINATION = 'PAGINATION';
+export const CURRENT_STORY = 'CURRENT_STORY';

@@ -12,5 +12,18 @@
 </template>
 
 <script>
-    export default {}
+    import { mapState } from 'vuex'
+
+    export default {
+        computed: mapState({
+            error: state => state.stories.error,
+        }),
+        watch: {
+            error: function (error) {
+                if (error) {
+                    this.$router.replace('/error');
+                }
+            }
+        },
+    }
 </script>

@@ -1,22 +1,29 @@
-import { getStories } from '../../api';
-
-import { PAGINATION } from "./getters-types";
+import moment from "moment";
+import { getStories, getStory } from '../../api';
+import { PAGINATION, CURRENT_STORY } from "./getters-types";
+import { makePagination } from './make-pagination';
 
 import {
     SET_STORIES,
     SET_LOAD,
     SET_PAGINATION,
+    SET_STORY,
+    SET_ERROR,
 } from './mutation-types';
 
 import {
     FETCH_STORIES,
+    FETCH_STORY,
     LOAD_STORIES,
+    LOAD_STORY,
 } from './action-types';
 
 let state = {
     stories: [],
     load: false,
     pagination: null,
+    current_story: null,
+    error: false
 };
 
 let mutations = {
@@ -30,69 +37,28 @@ let mutations = {
 
     [SET_PAGINATION] (state, pagination) {
         state.pagination = pagination;
-    }
-};
+    },
 
-const page = (link, text, className = '') => ({ link, text, className });
+    [SET_STORY] (state, story) {
+        state.current_story = story;
+    },
 
-const makePagination = (pagination) => {
-    if (pagination == null) return [];
-
-    let pages = [];
-    let { current_page, last_page } = pagination;
-    let prev_page = current_page - 1;
-    let next_page = current_page + 1;
-    let prev_class = prev_page < 1 ? 'disabled' : '';
-    let next_class = next_page > last_page ? 'disabled' : '';
-
-    pages.push(page(prev_page, 'Anterior', prev_class));
-
-    if (current_page - 3 >= 1) {
-        pages.push(page(1, 1));
-    }
-
-    if (current_page - 3 > 1) {
-        pages.push(page(current_page - 3, '...', 'disabled'));
-    }
-
-    if (current_page - 2 >= 1) {
-        pages.push(page(current_page - 2, current_page - 2));
-    }
-
-    if (prev_page >= 1) {
-        pages.push(page(prev_page, prev_page));
-    }
-
-    pages.push(page(current_page, current_page, 'disabled'));
-
-    if (next_page <= last_page) {
-        pages.push(page(next_page, next_page));
-    }
-
-    if (current_page + 2 <= last_page) {
-        pages.push(page(current_page + 2, current_page + 2));
-    }
-
-    if (current_page + 3 < last_page) {
-        pages.push(page(current_page + 3, '...', 'disabled'));
-    }
-
-    if (current_page + 3 <= last_page) {
-        pages.push(page(last_page, last_page));
-    }
-
-    pages.push(page(next_page, 'Próximo', next_class));
-
-    return {
-        current_page: pagination.current_page,
-        pages,
-    };
+    [SET_ERROR] (state, error) {
+        state.error = error;
+    },
 };
 
 let getters = {
     [PAGINATION]: ({ pagination }) => {
         return makePagination(pagination);
-    }
+    },
+
+    [CURRENT_STORY]: ({ current_story }) => {
+        if (current_story == null) return null;
+
+        let time = moment.unix(current_story.time).fromNow();
+        return {...current_story, time};
+    },
 };
 
 let actions = {
@@ -105,8 +71,31 @@ let actions = {
         commit(SET_STORIES, response.data);
     },
 
+    async [FETCH_STORY] ({ commit }, id) {
+        commit(SET_LOAD, true);
+        commit(SET_STORY, await getStory(id));
+    },
+
     async [LOAD_STORIES] ({ dispatch, commit }, page) {
-        dispatch(FETCH_STORIES, page).then(() => commit(SET_LOAD, false));
+        dispatch(FETCH_STORIES, page)
+            .then(() => {
+                commit(SET_LOAD, false);
+                commit(SET_ERROR, false);
+            }).catch(() => {
+                commit(SET_LOAD, false);
+                commit(SET_ERROR, true);
+            });
+    },
+
+    async [LOAD_STORY] ({ dispatch, commit }, id) {
+        dispatch(FETCH_STORY, id)
+            .then(() => {
+                commit(SET_LOAD, false);
+                commit(SET_ERROR, false);
+            }).catch(() => {
+                commit(SET_LOAD, false);
+                commit(SET_ERROR, true);
+            });
     },
 };
 
