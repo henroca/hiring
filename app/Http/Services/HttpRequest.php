@@ -20,7 +20,7 @@ class HttpRequest
      *
      * @var array
      */
-    const BASE_CONFIG = ['timeout'  => 2.0];
+    const BASE_CONFIG = ['timeout'  => 5.0];
 
     /**
      *

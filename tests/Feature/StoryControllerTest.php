@@ -8,6 +8,8 @@ use App\Support\Collection;
 
 class StoryControllerTest extends TestCase
 {
+    private $mock;
+
     /**
      * Listando as novas histórias por pagina.
      *
@@ -15,6 +17,12 @@ class StoryControllerTest extends TestCase
      */
     public function returns_the_stories()
     {
+        $collection = new Collection([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+        $this->mock->shouldReceive('load')
+            ->with(\Mockery::type(Collection::class))
+            ->andReturn($collection);
+
         $response = $this->json('GET', '/api/stories');
 
         $response->assertStatus(200)
@@ -42,6 +50,12 @@ class StoryControllerTest extends TestCase
      */
     public function returns_the_second_page()
     {
+        $collection = new Collection([10 => 11, 11 => 12]);
+
+        $this->mock->shouldReceive('load')
+            ->with(\Mockery::type(Collection::class))
+            ->andReturn($collection);
+
         $response = $this->json('GET', '/api/stories?page=2');
 
         $response->assertStatus(200)
@@ -66,11 +80,11 @@ class StoryControllerTest extends TestCase
     {
         parent::setUp();
 
-        $mock = \Mockery::mock(HackerNewsHttp::class);
-        $mock->shouldReceive('getNewStories')->andReturn(
+        $this->mock = \Mockery::mock(HackerNewsHttp::class);
+        $this->mock->expects()->getNewStories()->andReturn(
             new Collection([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
         );
 
-        $this->app->instance(HackerNewsHttp::class, $mock);
+        $this->app->instance(HackerNewsHttp::class, $this->mock);
     }
 }

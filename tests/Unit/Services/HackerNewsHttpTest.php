@@ -63,8 +63,35 @@ class HackerNewsHttpTest extends TestCase
 
         $http = new HackerNewsHttp();
         $http->registerRequest($mock);
+        $story = $this->getStory();
 
-        $story = new Story([
+        $this->assertEquals($story, $http->getStory(8863));
+    }
+
+    /**
+     * Carrega as histórias requisitadas
+     *
+     * @test
+     */
+    public function load_histories()
+    {
+        $mock = \Mockery::mock(HttpRequest::class);
+
+        $mock->expects()->get('https://hacker-news.firebaseio.com/v0/item/8863.json')
+            ->andReturn(
+                new Response(200, [], $this->story)
+            );
+
+        $http = new HackerNewsHttp();
+        $http->registerRequest($mock);
+        $story = $this->getStory()->jsonSerialize();
+
+        $this->assertEquals(new Collection([$story]), $http->load(new Collection([8863])));
+    }
+
+    private function getStory()
+    {
+        return new Story([
             "by" => "dhouston",
             "descendants" => 71,
             "id" => 8863,
@@ -75,7 +102,5 @@ class HackerNewsHttpTest extends TestCase
             "type" => "story",
             "url" => "http://www.getdropbox.com/u/2/screencast.html"
         ]);
-
-        $this->assertEquals($story, $http->getStory(8863));
     }
 }
