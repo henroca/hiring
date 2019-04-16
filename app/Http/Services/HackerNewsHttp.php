@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Http\Services\API\HackerNews;
 use App\Support\Collection;
+use App\Models\Story;
 
 /**
  * Realiza as requisições para o hacker news
@@ -44,9 +45,16 @@ class HackerNewsHttp
     {
         $api = new HackerNews();
         $response = $this->getResponse($api->newStories());
-        $stories = new Collection(json_decode($response));
 
-        return $stories;
+        return new Collection(json_decode($response));
+    }
+
+    public function getStory($id) : Story
+    {
+        $api = new HackerNews();
+        $response = $this->getResponse($api->story(compact('id')));
+
+        return new Story(json_decode($response));
     }
 
     /**
