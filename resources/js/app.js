@@ -20,10 +20,21 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('stories', require('./components/Stories.vue').default);
+Vue.component('stories', require('./components/stories/Stories.vue').default);
 Vue.component('pagination', require('./components/Pagination.vue').default);
-Vue.component('story', require('./components/Story.vue').default);
+Vue.component('story', require('./components/stories/Story.vue').default);
 Vue.component('spinner', require('epic-spinners').AtomSpinner);
+
+
+Vue.filter('host', function (path) {
+    if (!path) return '';
+
+    let pathArray = path.split( '/' );
+    var protocol = pathArray[0];
+    var host = pathArray[2];
+
+    return protocol + '//' + host;
+})
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

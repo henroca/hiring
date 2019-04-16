@@ -3,6 +3,8 @@
     <head>
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        <title>Hacker News</title>
+
         <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     </head>
     <body>
