@@ -1,31 +1,26 @@
-# FluxoTI: trabalhe conosco
+# FluxoTI: Teste HackerNews
 
-Olá desenvolvedor, quer trabalhar conosco? Basta dar um *fork* nesse repositório, fazer o nosso teste e abrir um PR com a sua implementação.  
-Também precisamos que envie seu curriculo para a gente, no email dev@fluxoti.com. Pode mandar tudo que achar interessante junto: linkedin, twitter, blog, site, github, projetos open-source que participa, artigos que tenha escrito, enfim, tudo mesmo que julgar interessante.
+Teste realizado por Jefferson Henrique Ramos
 
-## Requisitos
+O teste consiste em consumir uma API fornecida pelo [HackerNews](https://github.com/HackerNews/API) e utilizando *VueJs* exibir os dados. Como a escolha do conteúdo é do usuário, foi selecionado as *news stores* para serem exibidas.
 
-- PHP
-- Framework Laravel
-- JS
-- HTML5
-- SASS
-- CSS3
-- Gostar de programar (mas gostar muito mesmo)
-- Saber trabalhar com Linux
-- Saber trabalhar com GIT
-- Gostar de desafios
+## Dependências
 
----
-Utilizando o framework Laravel, crie uma aplicação que consulte a API do [HackerNews](https://github.com/HackerNews/API). Você fica livre para decidir o que deseja exibir e como deseja exibir, se vai utilizar cache ou não, etc. Deixamos isso ao seu critério. Você pode apresentar as informações que julgar mais importantes ou interessantes e no layout que achar mais bonito e funcional :wink:.  
-O *README* do projeto deverá conter as informações sobre como instalar e executar a aplicação.
+- git
+- [Docker](https://docs.docker.com/install/) e [Docker Compose](https://docs.docker.com/compose/install/)
 
-### Alguns diferenciais
+### Instalação
 
-- Utilizar Vue.js na implementação
-- Utilizar Vuex na implementação
-- Utilizar um pré-processador CSS (usamos SASS aqui, mas não tem problema ser outro não :smile:)
-- Utilizar ES6 (amamos ES6 :heart_eyes:)
-- Utilizar Docker / Docker Compose
+Passos para instalar a aplicação:
 
-*OBS:* Mesmo utilizando javascript para exibir os dados, é necessário que a API do hackernews seja consumida pelo PHP. Num projeto real, isso não seria necessário, mas precisamos ver algum código backend :wink:
+- Clonar o repositório git `git clone git@github.com:henroca/hiring.git`
+- Entre no diretório `cd hiring`
+- Levantar os contêineres `docker-compose up -d`
+- Instalar as dependências do Node `docker-compose run node_app yarn install`
+- Compilar os javascripts e sass `docker-compose run node_app yarn run dev`
+- Criar o arquivo env `cp .env.example .env`
+- Instalar as dependências do php `docker-compose exec app composer install`
+- Gerar a KEY do laravel `docker-compose exec app php artisan key:generate`
+- Rodar os testes `docker-compose exec app ./vendor/bin/phpunit`
+
+Se tudo rodar sem problemas, você poderá acessar aplicação [clicando aqui](http://localhost) :heart_eyes:.
