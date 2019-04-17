@@ -1,7 +1,12 @@
 import moment from "moment";
-import { getStories, getStory } from '../../api';
 import { PAGINATION, CURRENT_STORY } from "./getters-types";
 import { makePagination } from './make-pagination';
+
+import {
+    getStories,
+    getStory,
+    getStoriesReload
+} from '../../api';
 
 import {
     SET_STORIES,
@@ -16,6 +21,8 @@ import {
     FETCH_STORY,
     LOAD_STORIES,
     LOAD_STORY,
+    RELOAD_STORIES,
+    FETCH_STORIES_RELOAD,
 } from './action-types';
 
 let state = {
@@ -76,6 +83,15 @@ let actions = {
         commit(SET_STORY, await getStory(id));
     },
 
+    async [FETCH_STORIES_RELOAD] ({ commit }, page) {
+        commit(SET_LOAD, true);
+
+        let response = await getStoriesReload(page);
+
+        commit(SET_PAGINATION, response);
+        commit(SET_STORIES, response.data);
+    },
+
     async [LOAD_STORIES] ({ dispatch, commit }, page) {
         dispatch(FETCH_STORIES, page)
             .then(() => {
@@ -89,6 +105,17 @@ let actions = {
 
     async [LOAD_STORY] ({ dispatch, commit }, id) {
         dispatch(FETCH_STORY, id)
+            .then(() => {
+                commit(SET_LOAD, false);
+                commit(SET_ERROR, false);
+            }).catch(() => {
+                commit(SET_LOAD, false);
+                commit(SET_ERROR, true);
+            });
+    },
+
+    async [RELOAD_STORIES] ({ dispatch, commit }, page) {
+        dispatch(FETCH_STORIES_RELOAD, page)
             .then(() => {
                 commit(SET_LOAD, false);
                 commit(SET_ERROR, false);

@@ -5,6 +5,7 @@ namespace App\Http\Services;
 use App\Http\Services\API\HackerNews;
 use App\Support\Collection;
 use App\Models\Story;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Realiza as requisições para o hacker news
@@ -21,9 +22,18 @@ class HackerNewsHttp
      */
     private $request;
 
+    /**
+     * responsável por gerar as url para as requisições
+     *
+     * @var App\Http\Services\API\HackerNews
+     */
+    private $api;
+
+
     public function __construct()
     {
         $this->registerRequest(new HttpRequest);
+        $this->api = new HackerNews();
     }
 
     /**
@@ -43,8 +53,7 @@ class HackerNewsHttp
      */
     public function getNewStories() : Collection
     {
-        $api = new HackerNews();
-        $response = $this->getResponse($api->newStories());
+        $response = $this->getResponse($this->api->newStories());
 
         return new Collection(json_decode($response));
     }
@@ -56,8 +65,7 @@ class HackerNewsHttp
      */
     public function getStory($id) : Story
     {
-        $api = new HackerNews();
-        $response = $this->getResponse($api->story(compact('id')));
+        $response = $this->getResponse($this->api->story(compact('id')));
 
         return new Story(json_decode($response));
     }
@@ -75,12 +83,30 @@ class HackerNewsHttp
     }
 
     /**
+     * Apaga o cache para novas histórias
+     */
+    public function forgetCache()
+    {
+        Cache::forget("request:{$this->api->newStories()}");
+    }
+
+    /**
      * Retorna a resposta da requisição
      *
      * @return string $response
      */
     private function getResponse($url) : string
     {
-        return $this->request->get($url)->getBody()->getContents();
+        $key = "request:{$url}";
+
+        if (Cache::has($key)) {
+            return Cache::get($key);
+        }
+
+        $response = $this->request->get($url)->getBody()->getContents();
+
+        Cache::put($key, $response, now()->addHours(3));
+
+        return $response;
     }
 }

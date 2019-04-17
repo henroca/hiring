@@ -11,3 +11,10 @@ export const getStory = (id) => (
             (response) => response.data
         )
 );
+
+export const getStoriesReload = (page) => (
+    axios.get(`/api/stories/reload?page=${page}`)
+        .then(
+            (response) => response.data
+        )
+);
