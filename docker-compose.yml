@@ -11,6 +11,7 @@ services:
       - ./:/var/www
     depends_on:
       - db
+      - redis_app
     networks:
       - app-network
 
@@ -24,6 +25,12 @@ services:
       - ./:/var/www
     networks:
       - app-network
+
+  redis_app:
+    image: redis:5.0.4
+    container_name: redis_app
+    networks:
+        - app-network
 
   webserver:
     image: nginx:alpine

@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Services\HackerNewsHttp;
-use Illuminate\Support\Collection;
 
 class StoryController extends Controller
 {
@@ -22,5 +20,12 @@ class StoryController extends Controller
         $story = $http->getStory($id);
 
         return response()->json($story->jsonSerialize());
+    }
+
+    public function reload(HackerNewsHttp $http)
+    {
+        $http->forgetCache();
+
+        return $this->index($http);
     }
 }

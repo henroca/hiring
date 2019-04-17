@@ -23,12 +23,12 @@ class HttpRequestTest extends TestCase
     {
         $http = new HttpRequest();
 
-        $this->assertEquals(['timeout'  => 5.0], $http->getConfig());
+        $this->assertEquals(['timeout'  => 10.0], $http->getConfig());
 
         $http->addConfig(['base_uri' => 'http://httpbin.org']);
 
         $this->assertEquals(
-            ['timeout'  => 5.0, 'base_uri' => 'http://httpbin.org'],
+            ['timeout'  => 10.0, 'base_uri' => 'http://httpbin.org'],
             $http->getConfig()
         );
     }

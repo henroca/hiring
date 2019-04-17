@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,4 +12,5 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('/stories/reload', 'StoryController@reload');
 Route::resource('stories', 'StoryController')->only(['index', 'show']);
